@@ -3,7 +3,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>org.example</groupId>
   <artifactId>springboot-zipkin-demo</artifactId>
   <packaging>pom</packaging>
@@ -14,23 +13,6 @@
     <module>oms-service</module>
   </modules>
 
-  <properties>
-    <spring-cloud.version>2020.0.0</spring-cloud.version>
-  </properties>
-
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>${spring-cloud.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <name>springboot-zipkin-demo</name>
   <url>http://www.example.com</url>
 
@@ -39,6 +21,5 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-
 
 </project>

@@ -24,7 +24,9 @@ ES_PASSWORD=密码
 ```
 # 支持功能
 
-- [ ] feign 接口调用
-- [ ] 异步线程调用
-- [ ] Hystrix 接口
-- [ ] rabbitMQ
+- [x] feign 接口调用
+- [x] 异步线程调用
+- [x] @Async调用
+- [x] Hystrix 接口 （cloud 2.x.0 版本）
+- [x] rabbitMQ
+- [x] 手动获取tarceId
