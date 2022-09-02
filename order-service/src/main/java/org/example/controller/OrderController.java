@@ -45,13 +45,7 @@ public class OrderController {
     @HystrixCommand(fallbackMethod = "hiError", threadPoolKey = "hiErrorPool")
     @GetMapping("/hystrix")
     public String hystrix() {
-        Span span = tracer.nextSpan();
-        try {
-            span.start();
-            log.info("进入熔断 {}", span.context().traceId());
-        } finally {
-            span.finish();
-        }
+        log.info("进入熔断 当前traceId：{}", tracer.currentSpan().context().traceIdString());
         num++;
         if (num>10) {
             throw new RuntimeException("异常");
@@ -60,13 +54,7 @@ public class OrderController {
     }
 
     public String hiError() {
-        Span span = tracer.nextSpan();
-        try {
-            span.start();
-            log.info("荣断了 {}", span.context().traceId());
-        } finally {
-            span.finish();
-        }
+        log.info("熔断了...");
         return "hi,sorry,error!";
     }
 }
