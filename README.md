@@ -30,3 +30,9 @@ ES_PASSWORD=密码
 - [x] Hystrix 接口 （cloud 2.x.0 版本）
 - [x] rabbitMQ
 - [x] 手动获取tarceId
+
+# 额外属性
+## Header 属性
+`X-B3-TraceId`
+## log MDC 属性
+Notice the [`appname`,`traceId`,`spanId`,`exportable`] entries from the MDC:

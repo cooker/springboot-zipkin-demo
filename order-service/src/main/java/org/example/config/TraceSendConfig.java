@@ -1,11 +1,15 @@
 package org.example.config;
 
+import org.springframework.cloud.sleuth.zipkin2.ZipkinAutoConfiguration;
 import org.springframework.cloud.sleuth.zipkin2.ZipkinProperties;
 import org.springframework.cloud.sleuth.zipkin2.ZipkinRestTemplateCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import zipkin2.Call;
+import zipkin2.Span;
 import zipkin2.codec.Encoding;
+import zipkin2.reporter.AsyncReporter;
+import zipkin2.reporter.Reporter;
 import zipkin2.reporter.Sender;
 
 import java.util.List;
@@ -18,18 +22,23 @@ import java.util.List;
  */
 @Configuration
 public class TraceSendConfig {
-    @Bean
-    public Sender myRestTemplateSender(final ZipkinProperties zipkin,
-                                       ZipkinRestTemplateCustomizer zipkinRestTemplateCustomizer) {
+
+    @Bean(ZipkinAutoConfiguration.REPORTER_BEAN_NAME)
+    public Reporter<Span> myReporter() {
+        return AsyncReporter.create(myRestTemplateSender());
+    }
+
+    @Bean(ZipkinAutoConfiguration.SENDER_BEAN_NAME)
+    public Sender myRestTemplateSender() {
         return new Sender() {
             @Override
             public Encoding encoding() {
-                return zipkin.getEncoder().encoding();
+                return Encoding.JSON;
             }
 
             @Override
             public int messageMaxBytes() {
-                return 5 * 1024 * 1024;
+                return Integer.MAX_VALUE;
             }
 
             @Override
